@@ -10,7 +10,7 @@ app.controller('mainController',['$scope','$http','$rootScope',function ($scope,
         total : 0,
         summary : []
     };
-
+   // function to fetch the questions
     $scope.getQuestion = function(){
         $http.post('/questions',$rootScope.data).then(successCallback, errorCallback);
 
@@ -21,40 +21,38 @@ app.controller('mainController',['$scope','$http','$rootScope',function ($scope,
             console.log(error);
         }
     };
-
+    //function to verify the answer
     $scope.verifyAnswer = function(){
+        //data to be send for verifying the answer
         $scope.sendData = {
             answer : $scope.answer,
             questionNumber : $rootScope.data.questionNumber
         };
+        //sending request
         $http.post('/verify',$scope.sendData).then(successCallback, errorCallback);
-
+        //if no error in http request
         function successCallback(response) {
             $scope.verifiedData = response.data;
+            //Increasing the question number in any case
             $rootScope.data.questionNumber +=1;
+            //if answer is correct increase the total
             if($scope.verifiedData.code==1){
                 $rootScope.data.total +=1;
-                var summaryData = {
-                    question : $scope.question,
-                    answered : $scope.answer,
-                    correctAns : $scope.verifiedData.ans,
-                    status : $scope.verifiedData.code
-                };
-                $rootScope.data.summary.push(summaryData);
             }
-            else{
-                var summaryData = {
-                    question : $scope.question,
-                    answered : $scope.answer,
-                    correctAns : $scope.verifiedData.ans,
-                    status : $scope.verifiedData.code
-                };
-                $rootScope.data.summary.push(summaryData);
-            }
+            //push the summary of the current question
+            var summaryData = {
+                question : $scope.question,
+                answered : $scope.answer,
+                correctAns : $scope.verifiedData.ans,
+                status : $scope.verifiedData.code
+            };
+            $rootScope.data.summary.push(summaryData);
+            //send the next question
             if($rootScope.data.questionNumber < 6){
                 $scope.getQuestion();
             }
         }
+        //if error in http request ,console the error
         function errorCallback(error) {
             console.log("Data could not be Obtained !" + error);
         }
