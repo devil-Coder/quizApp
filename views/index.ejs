@@ -23,34 +23,10 @@
             <form ng-submit="verifyAnswer()" class="form-group">
               <div class="radio" ng-repeat="option in question.options">
                 <label>
-                  <input type="radio" name="answer" value="{{option}}" ng-model="resData.answer">
+                  <input type="radio" name="answer" value="{{option }}" ng-model="$parent.$parent.answer">
                   {{option}}
                 </label>
-                  <div ng-model="resData">{{resData}}</div>
               </div>
-              <!--<div ng-repeat="option in question.options">-->
-                <!--<div class="custom-control custom-checkbox mb-3">-->
-                  <!--<input type="checkbox" class="custom-control-input" id="checkbox{{option}}" name="answer" value="{{option}}" ng-model="response.answer">-->
-                  <!--<label class="custom-control-label" for="checkbox{{option}}">{{option}}</label>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="radio">-->
-                <!--<label>-->
-                  <!--<input type="radio" name="choice" value="{{question.optionB}}" ng-model="answer.option">-->
-                  <!--{{question.optionB}}-->
-                <!--</label>-->
-              <!--</div>-->
-              <!--<div class="radio">-->
-                <!--<label>-->
-                  <!--<input type="radio" name="choice" value="{{question.optionC}}" ng-model="answer.option">-->
-                  <!--{{question.optionC}}-->
-                <!--</label>-->
-              <!--</div>-->
-              <!--<div class="radio">-->
-                <!--<label>-->
-                  <!--<input type="radio" name="choice" value="{{question.optionD}}" ng-model="answer.option">-->
-                  <!--{{question.optionD}}-->
-                <!--</label>-->
               <div class="next-button-container" align="center">
                 <button class="btn btn-outline-primary">Next -></button>
               </div>
@@ -64,11 +40,11 @@
                     <div class="container">
                         <h4>Q{{response.question.qno}}. {{response.question.que}}</h4>
                         <div style="padding:5%;">
-                            <p>Your answer : {{response.question.answered}}</p>
-                            <p>Correct Answer : {{response.correctAns}}</p>
+                            <p>Your answer : <b>{{response.answered}}</b></p>
+                            <p>Correct Answer : <b>{{response.correctAns}}</b></p>
 
-                            <div class="alert alert-success" role="alert" ng-if="response.status ==1">Correct Answer.</div>
-                            <div class="alert alert-danger" role="alert" ng-if="response.status ==0">Incorrect Answer.</div>
+                            <div class="alert alert-success" role="alert" ng-if="response.status ==1"><b>Correct Answer</b></div>
+                            <div class="alert alert-danger" role="alert" ng-if="response.status ==0"><b>Correct Answer</b></div>
                         </div>
                     </div>
                 </div>

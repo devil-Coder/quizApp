@@ -20,7 +20,6 @@ router.post('/questions',(req,res,next)=>{
 });
 
 router.post('/verify',(req,res,next)=>{
-    console.log(req.body);
     var questionNumber = req.body.questionNumber; //gets the question number form the body.
     var answer = req.body.answer ; //gets the user's of the answer
     question.findOne({qno:questionNumber}).select('ans').exec((err,doc)=>{

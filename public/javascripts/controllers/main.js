@@ -3,7 +3,7 @@
  */
 var app = angular.module("quizApp",[]);
 
-app.controller('mainController',['$scope','$http','$location','$rootScope',function ($scope,$http,$location,$rootScope) {
+app.controller('mainController',['$scope','$http','$rootScope',function ($scope,$http,$rootScope) {
     // This global object holds the question numeber of the current participant.
     $rootScope.data = {
         questionNumber : 1,
@@ -23,10 +23,8 @@ app.controller('mainController',['$scope','$http','$location','$rootScope',funct
     };
 
     $scope.verifyAnswer = function(){
-        console.log($scope.resData);
-        console.log($scope);
         $scope.sendData = {
-            answer : "all of these",
+            answer : $scope.answer,
             questionNumber : $rootScope.data.questionNumber
         };
         $http.post('/verify',$scope.sendData).then(successCallback, errorCallback);
@@ -38,7 +36,7 @@ app.controller('mainController',['$scope','$http','$location','$rootScope',funct
                 $rootScope.data.total +=1;
                 var summaryData = {
                     question : $scope.question,
-                    // answered : $scope.resData.answer,
+                    answered : $scope.answer,
                     correctAns : $scope.verifiedData.ans,
                     status : $scope.verifiedData.code
                 };
@@ -47,7 +45,7 @@ app.controller('mainController',['$scope','$http','$location','$rootScope',funct
             else{
                 var summaryData = {
                     question : $scope.question,
-                    // answered : $scope.resData.answer,
+                    answered : $scope.answer,
                     correctAns : $scope.verifiedData.ans,
                     status : $scope.verifiedData.code
                 };
@@ -60,9 +58,5 @@ app.controller('mainController',['$scope','$http','$location','$rootScope',funct
         function errorCallback(error) {
             console.log("Data could not be Obtained !" + error);
         }
-    }
-
-    $scope.showSummary = function(){
-
     }
 }]);
