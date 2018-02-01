@@ -7,14 +7,8 @@ router.get('/', (req, res, next)=>{
   res.render('index', { title: 'Express' });
 });
 
-router.get('/summary', (req, res, next)=>{
-    res.render('summary');
-});
-
 router.post('/questions',(req,res,next)=>{
-    console.log(req.body);
     var questionNumber = req.body.questionNumber; //Gets the question number form the body.
-    console.log(questionNumber);
     question.findOne({qno:questionNumber}).select('qno que options').exec((err,doc)=>{
           if(err){
               console.log(err); //if error, console the error.

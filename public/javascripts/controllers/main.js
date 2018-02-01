@@ -10,7 +10,6 @@ app.controller('mainController',['$scope','$http','$location','$rootScope',funct
         total : 0,
         summary : []
     };
-    $rootScope.resData;
 
     $scope.getQuestion = function(){
         $http.post('/questions',$rootScope.data).then(successCallback, errorCallback);
@@ -24,7 +23,8 @@ app.controller('mainController',['$scope','$http','$location','$rootScope',funct
     };
 
     $scope.verifyAnswer = function(){
-        console.log($rootScope.resData.answer);
+        console.log($scope.resData);
+        console.log($scope);
         $scope.sendData = {
             answer : "all of these",
             questionNumber : $rootScope.data.questionNumber

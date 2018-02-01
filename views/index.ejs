@@ -23,7 +23,7 @@
             <form ng-submit="verifyAnswer()" class="form-group">
               <div class="radio" ng-repeat="option in question.options">
                 <label>
-                  <input type="radio" name="answer" value="Raj" ng-model="resData.answer">
+                  <input type="radio" name="answer" value="{{option}}" ng-model="resData.answer">
                   {{option}}
                 </label>
                   <div ng-model="resData">{{resData}}</div>
